@@ -18,8 +18,8 @@ CREATE TABLE #Client
 
 CREATE TABLE #Private_Bankers
     (Loan_ID  Integer, 
-     Nazev  VARCHAR(200), 
-     Autor VARCHAR(200),
+     Type_of_loan  VARCHAR(200), 
+     Banker VARCHAR(200),
 	 Number_of_products Integer
     );
 
@@ -70,7 +70,7 @@ ORDER BY Client_ID
 GO
 
 --SELECT Performance of Private Bankers 
-SELECT K.Nazev 'Performance of Private Bankers', A.Number_of_products 
+SELECT K.Type_of_loan 'Performance of Private Bankers', A.Number_of_products 
    FROM #Private_Bankers K 
    JOIN #Debts Z ON Z.Loan_ID = K.Loan_ID
    JOIN (SELECT Z.Loan_ID, COUNT(Z.Loan_ID) Number_of_products
@@ -79,13 +79,13 @@ SELECT K.Nazev 'Performance of Private Bankers', A.Number_of_products
          GROUP BY Z.Loan_ID
         ) A ON A.Loan_ID = K.Loan_ID
 AND K.Number_of_products = A.Number_of_products
-GROUP BY K.Nazev,Z.Loan_ID,K.Number_of_products,A.Number_of_products
+GROUP BY K.Type_of_loan,Z.Loan_ID,K.Number_of_products,A.Number_of_products
 ;
 
 GO
 
 --SELECT Nonperforming Private Bankers
-SELECT K.Nazev 'Nonperforming Private Bankers', K.Number_of_products
+SELECT K.Type_of_loan 'Nonperforming Private Bankers', K.Number_of_products
    FROM #Private_Bankers K 
    LEFT JOIN #Debts Z ON Z.Loan_ID = K.Loan_ID 
 WHERE Z.Loan_ID IS NULL
