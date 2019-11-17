@@ -8,7 +8,7 @@ IF OBJECT_ID('tempdb.dbo.#Debts', 'U') IS NOT NULL
 GO
 
 CREATE TABLE #Client
-    (Client_ID Integer, 
+    (Client_ID Integer not null primary key, 
 	 Name  VARCHAR(200), 
      Surname VARCHAR(200), 
      Phone    VARCHAR(20), 
@@ -17,16 +17,16 @@ CREATE TABLE #Client
     );
 
 CREATE TABLE #Private_Bankers
-    (Loan_ID  Integer, 
+    (Loan_ID  Integer not null primary key, 
      Type_of_loan  VARCHAR(200), 
      Banker VARCHAR(200),
 	 Number_of_products Integer
     );
 
 CREATE TABLE #Debts
-    (Client_ID Integer, 
-	 Loan_ID  Integer, 
-     Date_from Date, 
+    (Client_ID Integer not null primary key, 
+	 Loan_ID  Integer not null, 
+     Date_from Date not null, 
      Date_to Date default '2999-12-31'
     );
 
