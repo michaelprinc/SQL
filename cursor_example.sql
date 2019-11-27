@@ -1,7 +1,7 @@
 DECLARE
 last_name  VARCHAR2(10);
 cursor     c1 IS SELECT LAST_NAME
-                 FROM EMPLOYEES
+                 FROM EMPLOYEES_TABLE
                    WHERE DEPARTMENT_ID = 20;
 BEGIN
     OPEN c1;
