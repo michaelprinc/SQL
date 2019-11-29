@@ -3,31 +3,31 @@
 <bank>
 
 <loan category="Branch Office">
-  <type lang="en"></type>
+  <type lang="en">Short Term</type>
   <banker>Aaron Hank</banker>
-  <year></year>
-  <interest rate></price>
+  <year>2019</year>
+  <interest_rate></price>
 </loan>
 
 <loan category="Telemarketing">
-  <type lang="en"></type>
+  <type lang="en">Short Term</type>
   <banker>Abagnale Frank</banker>
-  <year></year>
-  <interest rate></price>
+  <year>2019</year>
+  <interest_rate></price>
 </loan>
 
 <loan category="WEB">
-  <type lang="en"></type>
+  <type lang="en">Short Term</type>
   <banker>Abagnale Frank</banker>
-  <year></year>
-  <interest rate></price>
+  <year>2019</year>
+  <interest_rate></price>
 </loan>
 
 <loan category="WEB">
-  <type lang="en"></type>
+  <type lang="en">Long Term</type>
   <banker>Abbey Edward</banker>
-  <year></year>
-  <interest rate></price>
+  <year>2019</year>
+  <interest_rate></price>
 </loan>
 
 </bank>
