@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bank>
+
+<loan category="Branch Office">
+  <type lang="en"></type>
+  <banker>Aaron Hank</banker>
+  <year></year>
+  <interest rate></price>
+</loan>
+
+<loan category="Telemarketing">
+  <type lang="en"></type>
+  <banker>Abagnale Frank</banker>
+  <year></year>
+  <interest rate></price>
+</loan>
+
+<loan category="WEB">
+  <type lang="en"></type>
+  <banker>Abagnale Frank</banker>
+  <year></year>
+  <interest rate></price>
+</loan>
+
+<loan category="WEB">
+  <type lang="en"></type>
+  <banker>Abbey Edward</banker>
+  <year></year>
+  <interest rate></price>
+</loan>
+
+</bank>
