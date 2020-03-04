@@ -298,56 +298,49 @@ SELECT Name, Birthday, Phone,
 Address, Zip FROM Customers
 Performance pitfalls can be avoided in many ways. For example, avoid the time sinkhole of forcing SQL Server to check the system/master database every time by using only a stored procedure name, and never prefix it with SP_. Also setting NOCOUNT ON reduces the time required for SQL Server to count rows affected by INSERT, DELETE, and other commands. Using INNER JOIN with a condition is much faster than using WHERE clauses with conditions. We advise developers to learn SQL server queries to an advanced level for this purpose. For production purposes, these tips may be crucial to adequate performance. Notice that our tutorial examples tend to favor the INNER JOIN.
 
-36. Conditional Subquery Results
+/*36. Conditional Subquery Results
 The SQL operator EXISTS tests for the existence of records in a subquery and returns a value TRUE if a subquery returns one or more records. Have a look at this query with a subquery condition:
+*/
 
-1
-2
-3
 SELECT Name FROM Customers WHERE EXISTS 
 (SELECT Item FROM Orders 
 WHERE Customers.ID = Orders.ID AND Price < 50)
-In this example above, the SELECT returns a value of TRUE when a customer has orders valued at less than $50.
-
+/*In this example above, the SELECT returns a value of TRUE when a customer has orders valued at less than $50.
+*/
+/*
 37. Copying Selections from Table to Table
 There are a hundred and one uses for this SQL tool. Suppose you want to archive your yearly Orders table into a larger archive table. This next example shows how to do it.
+*/
 
-1
-2
-3
 INSERT INTO Yearly_Orders 
 SELECT * FROM Orders 
 WHERE Date<=1/1/2018
-This example will add any records from the year 2018 to the archive.
-
-38. Catching NULL Results
+/*This example will add any records from the year 2018 to the archive.
+*/
+/*38. Catching NULL Results
 In cases where NULL values are allowed in a field, calculations on those values will produce NULL results as well. This can be avoided by use of the IFNULL operator. In this next example, a value of zero is returned rather than a value of NULL when the calculation encounters a field with NULL value:
+*/
 
-1
-2
-3
 SELECT Item, Price * 
 (QtyInStock + IFNULL(QtyOnOrder, 0)) 
 FROM Orders
-39. HAVING can be Relieving!
+/*39. HAVING can be Relieving!
 The problem was that the SQL WHERE clause could not operate on aggregate functions. The problem was solved by using the HAVING clause. As an example, this next query fetches a list of customers by the region where there is at least one customer per region:
+*/
 
-1
-2
-3
-4
 SELECT COUNT(ID), Region
 FROM Customers
 GROUP BY Region
 HAVING COUNT(ID) > 0;
+/*
 40. Tie things up with Strings!
 Let’s have a look at processing the contents of field data using functions. Substring is probably the most valuable of all built-in functions. It gives you some of the power of Regex, but it’s not so complicated as Regex. Suppose you want to find the substring left of the dots in a web address. Here’s how to do it with an SQL Select query:
+*/
 
-1
 SELECT SUBSTRING_INDEX("www.bytescout.com", ".", 2);
 This line will return everything to the left of the second occurrence of “. ” and so, in this case, it will return
 
-1
+*/
 <a href="https://bytescout.com">www.bytescout.com</a>
 41. Use COALESCE to return the first non-null expression
 The SQL Coalesce is used to manage the NULL values of the database. In this method, the NULL values are substituted with the user-defined value. The SQL Coalesce function assesses the parameters in series and always delivers first non-null value from the specified argument record.
@@ -356,22 +349,23 @@ For example,
 
 Syntax:
 
-1
+*/
+
 SELECT COALESCE(NULL,NULL,'ByteScout',NULL,'Byte')
 Output
 
 ByteScout
-
+/*
 42. Use Convert to transform any value into a particular datatype
 This is used to convert a value into a defined datatype. For example, if you want to convert a particular value into int datatype then convert function can be used to achieve this. For example,
+*/
 
-1
 SELECT CONVERT(int, 27.64)
-Output
-27
 
+/*
 43. DENSE_RANK()Analytical query
 It is an analytic query that computes the rank of a row in an arranged collection of rows. An output rank is a number starting from 1. DENSE_RANK is one of the most important analytic queries. It returns rank preferences as sequential numbers. It does not jump rank in event of relations. For example, the following query will give the sequential ranks to the employee.
+*/
 
 SELECT eno,
 dno,
@@ -379,22 +373,6 @@ salary,
 DENSE_RANK() OVER (PARTITION BY dno ORDER BY salary) AS ranking
 FROM   employee;
  
-ENO         DNO SALARY     RANKING
----------- ---------- ---------- ----------
-7933         10 1500          1
-7788         10 2650          2
-7831         10 6000          3
-7362         20 900          1
-7870         20 1200          2
-7564         20 2575          3
-7784         20 4000          4
-7903         20 4000          4
-7901         30 550          1
-7655         30 1450          2
-7522         30 1450          2
-7844         30 1700          3
-7493         30 1500          4
-7698         30 2850          5
 /*44. Query_partition_clause
 The query_partition_clause breaks the output set into distributions, or collections, of data. The development of the analytic query is limited to the confines forced by these partitions, related to the process a GROUP BY clause modifies the performance of an aggregate function. If the query_partition_clause is eliminated, the entire output collection is interpreted as a separate partition.
 
@@ -404,22 +382,7 @@ SELECT eno, dno, salary,
 AVG(salary) OVER () AS avg_sal
 FROM   employee;
  
-/*EO         DNO SALARY      AVG_SAL
----------- ---------- ---------- ----------
-7364         20 900 2173.21428
-7494         30 1700 2173.21428
-7522         30 1350 2173.21428
-7567         20 3075 2173.21428
-7652         30 1350 2173.21428
-7699         30 2950 2173.21428
-7783         10 2550 2173.21428
-7789         20 3100 2173.21428
-7838         10 5100 2173.21428
-7845         30 1600 2173.21428
-7877         20 1200 2173.21428
-7901         30 1050 2173.21428
-7903         20 3100 2173.21428
-7935         10 1400 2173.21428
+/*
 45. Finding the last five records from the table
 Now, if you want to fetch the last eight records from the table then it is always difficult to get such data if your table contains huge information. For example, you want to get the last 8 records from the employee table then you can use rownum and a union clause. 
 
